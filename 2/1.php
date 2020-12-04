@@ -1,9 +1,7 @@
 <?php
 
-$content = file_get_contents(__DIR__ . '/values.txt');
-$removeEmptyStrings = static fn(string $value): string => $value !== '';
+$values = explode(PHP_EOL, file_get_contents(__DIR__ . '/values.txt'));
 
-$values = array_filter(explode(PHP_EOL, $content), $removeEmptyStrings);
 $values = array_map(static function (string $value) {
     preg_match('/(?<min>\d+)-(?<max>\d+) (?<letter>[a-z]): (?<password>.+)/', $value, $matches);
 
